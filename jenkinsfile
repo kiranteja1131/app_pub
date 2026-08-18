@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage('checkout'){
+            steps{
+                echo 'code has been checkout from  github'
+            }
+        }
+        stage('Run python aplication'){
+        steps{
+            bat 'python app.py'
+        }}
+        
+    }
+}
