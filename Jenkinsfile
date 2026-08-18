@@ -1,23 +1,24 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('checkout'){
-            steps{
-                echo 'code has been checkout from  github'
+
+    environment {
+        APP_NAME = 'MyPythonApp'
+        ENVIRONMENT = 'development'
+    }
+
+    stages {
+        stage('Environment Info') {
+            steps {
+                echo "Application: ${env.APP_NAME}"
+                echo "Environment: ${env.ENVIRONMENT}"
+                echo "Build Number: ${env.BUILD_NUMBER}"
             }
         }
-        stage('Run python aplication'){
-        steps{
-            bat 'python app.py'
-        }}
-        stage('Environment Info') {
-    steps {
-        echo "Job Name: ${env.JOB_NAME}"
-        echo "Build Number: ${env.BUILD_NUMBER}"
-        echo "Workspace: ${env.WORKSPACE}"
-        echo "Build URL: ${env.BUILD_URL}"
-    }
-}
-        
+
+        stage('Run Python App') {
+            steps {
+                bat 'python app.py'
+            }
+        }
     }
 }
